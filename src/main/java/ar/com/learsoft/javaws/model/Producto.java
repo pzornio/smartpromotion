@@ -18,8 +18,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name= "Product")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "Product")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Producto {
 
 	@Id
@@ -29,5 +29,5 @@ public class Producto {
 	private String tipo;
 	private Double precio;
 	private String detalle;
-	
+
 }
