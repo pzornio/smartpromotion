@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Built-By: Marcela
-Build-Jdk: 15.0.2
+Built-By: Main
+Build-Jdk: 14.0.2
 Implementation-Title: Spring Boot REST API Example
 Implementation-Version: 1.0
 Implementation-Vendor-Id: org.springframework.boot
