@@ -1,6 +1,6 @@
 package ar.com.learsoft.javaws.model;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,18 +20,16 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name= "Client")
+@Table(name= "Promocion")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Client implements Serializable{
+public class Promocion {
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private String nombre;
-	private String apellido;
-//	private List<Telefono> telefonos;
-//	private List<Direccion> direcciones;
-//	private Ocupacion ocupacion;
-	
-	
+	private Producto producto; // decia productos pero no se si es una lista
+	private String codigo;
+	private Integer cantidades;
+	private Integer descuento;
 }
