@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+<script>
+	$(document).ready(function() {
+		
+		$("#send").click(function() {
+			send("hello");
+		});
+		
+		function send(message) {
+			$.ajax({
+				type : "GET",
+				async : true,
+				url : "http://localhost:8080/" + message,
+				success : function(res) {
+					$("#response").html(res);
+					console.log(res);
+				},
+				error : function(res) {
+					console.log(res);
+				}
+			});
+		}
+	});
+</script>
+<title>Java Workshop</title>
+</head>
+<body>
+	<button class="btn btn-success action" type="button" id="send">SEND</button >
+	<br>
+	<br>
+	<div id="response"></div>
+</body>
+</html>
