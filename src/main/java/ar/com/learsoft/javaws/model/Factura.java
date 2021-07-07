@@ -23,7 +23,7 @@ import lombok.ToString;
 @Entity
 @Table(name= "compra")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Compra {
+public class Factura {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

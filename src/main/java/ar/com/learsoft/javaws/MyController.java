@@ -12,10 +12,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.com.learsoft.javaws.repository.FacturaRepository;
+
 
 @RestController
 public class MyController {
     
+	@Autowired 
+	private FacturaRepository facturaRepository;
 	
-  
+	//DELETE	
+		@DeleteMapping("/factura/{id}")
+		public String deleteClient(@PathVariable Integer id) {
+			facturaRepository.deleteById(id);
+			return "Dejo algo escrito para dar a enterde que el "+id+" fue borrado";
+		}
+		
+
 }
