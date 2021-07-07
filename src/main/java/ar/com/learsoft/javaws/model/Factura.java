@@ -21,9 +21,9 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name= "compra")
+@Table(name= "factura")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Compra {
+public class Factura {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
