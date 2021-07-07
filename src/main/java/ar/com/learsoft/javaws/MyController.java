@@ -1,6 +1,7 @@
 package ar.com.learsoft.javaws;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +26,17 @@ public class MyController {
 		Factura invoice = facturaRepository.getOne(id);
 		return invoice;
 	}
+
 	@PostMapping("/factura")
 	public Factura crearFactura(@RequestBody Factura factura) {
 		return factura;
 	}
+
+	
+	@DeleteMapping("/factura/{id}")
+		public String deleteFactura(@PathVariable Integer id) {
+			facturaRepository.deleteById(id);
+			return "La factura numero  "+id+" fue borrado";
+    }
+
 }
