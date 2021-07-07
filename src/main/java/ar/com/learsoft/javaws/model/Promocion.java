@@ -1,7 +1,5 @@
 package ar.com.learsoft.javaws.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,15 +18,14 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name= "Promocion")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "Promocion")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Promocion {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private Producto producto; // decia productos pero no se si es una lista
+	//	private Producto producto; // decia productos pero no se si es una lista
 	private String codigo;
 	private Integer cantidades;
 	private Integer descuento;

@@ -1,0 +1,9 @@
+ar\com\learsoft\javaws\MyController.class
+ar\com\learsoft\javaws\repository\FacturaRepository.class
+ar\com\learsoft\javaws\StartApplication.class
+ar\com\learsoft\javaws\UIController.class
+ar\com\learsoft\javaws\model\Cliente.class
+ar\com\learsoft\javaws\config\AppConfig.class
+ar\com\learsoft\javaws\model\Factura.class
+ar\com\learsoft\javaws\model\Promocion.class
+ar\com\learsoft\javaws\model\Producto.class
