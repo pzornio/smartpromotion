@@ -25,7 +25,7 @@ public class Promotion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	//	private Producto producto; // decia productos pero no se si es una lista
+	//	private Product product;
 	private String code;
 	private Integer amount;
 	private Integer discount;
