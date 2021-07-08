@@ -1,10 +1,14 @@
-package ar.com.learsoft.javaws.model;
+package ar.com.learsoft.smartpromotion.model;
+
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -18,15 +22,24 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name = "Promocion")
+@Table(name = "Invoice")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Promocion {
+public class Invoice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	//	private Producto producto; // decia productos pero no se si es una lista
-	private String codigo;
-	private Integer cantidades;
-	private Integer descuento;
+	@Transient
+	private Client client;
+	private Date date;
+	@Transient
+	private List<Product> products;
+	private Double amount;
+	//private String descuento;
+	@Transient
+	private List<Promotion> promotions;
+	//private Integer cantidad;
+	private String paymentMethod;
+	private String channel;
+
 }

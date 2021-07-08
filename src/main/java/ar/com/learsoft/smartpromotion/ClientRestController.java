@@ -1,4 +1,4 @@
-package ar.com.learsoft.javaws;
+package ar.com.learsoft.smartpromotion;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.com.learsoft.javaws.model.Cliente;
-import ar.com.learsoft.javaws.repository.ClientRepository;
+import ar.com.learsoft.smartpromotion.model.Client;
+import ar.com.learsoft.smartpromotion.repository.ClientRepository;
 
 @RestController
 @RequestMapping("/client")
@@ -23,28 +23,28 @@ public class ClientRestController {
 	private ClientRepository clientRepository;
 
 	@GetMapping("/{id}")
-	public Cliente readOne(@PathVariable Integer id) {
-		Cliente cliente = clientRepository.findById(id).get();
-		return cliente;
+	public Client readOne(@PathVariable Integer id) {
+		Client client = clientRepository.findById(id).get();
+		return client;
 	}
 
 	@PatchMapping("/")
-	public Cliente update(@RequestBody Cliente clienteUpdate) {
-		Cliente cliente = clientRepository.findById(clienteUpdate.getId()).get();
-		cliente.setNombre(clienteUpdate.getNombre());
-		cliente.setApellido(clienteUpdate.getApellido());
-		return clientRepository.save(cliente);
+	public Client update(@RequestBody Client clientUpdate) {
+		Client client = clientRepository.findById(clientUpdate.getId()).get();
+		client.setName(clientUpdate.getName());
+		client.setLastname(clientUpdate.getLastname());
+		return clientRepository.save(client);
 	}
 	
 	@PostMapping("/")
-	public Cliente create(@RequestBody Cliente cliente) {
-		return clientRepository.save(cliente);
+	public Client create(@RequestBody Client client) {
+		return clientRepository.save(client);
 	}
 
 	@GetMapping("/")
-	public List<Cliente> readAll() {
-		List<Cliente> clientes = clientRepository.findAll();
-		return clientes;
+	public List<Client> readAll() {
+		List<Client> clients = clientRepository.findAll();
+		return clients;
 	}
 
 	@DeleteMapping("/{id}")

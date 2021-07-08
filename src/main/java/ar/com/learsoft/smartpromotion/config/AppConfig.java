@@ -1,4 +1,4 @@
-package ar.com.learsoft.javaws.config;
+package ar.com.learsoft.smartpromotion.config;
 
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
