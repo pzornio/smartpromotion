@@ -24,7 +24,7 @@ import lombok.ToString;
 public class Promotion {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Integer id;
 	@Transient
 	private Product product;
