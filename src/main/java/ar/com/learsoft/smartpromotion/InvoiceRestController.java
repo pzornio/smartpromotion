@@ -6,13 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.learsoft.smartpromotion.model.Invoice;
 import ar.com.learsoft.smartpromotion.repository.InvoiceRepository;
 
 @RestController
-public class APIInvoice {
+@RequestMapping("/invoice")
+public class InvoiceRestController {
 
 	@Autowired
 	private InvoiceRepository invoiceRepository;
@@ -21,19 +23,19 @@ public class APIInvoice {
 		return invoiceRepository.save(invoice);
 	}
 
-	@GetMapping("invoice/{id}")
+	@GetMapping("/{id}")
 	public Invoice readInvoice(@PathVariable Integer id) {
 		Invoice invoice = invoiceRepository.getOne(id);
 		return invoice;
 	}
 
-	@PostMapping("/invoice")
+	@PostMapping("/")
 	public Invoice createInvoice(@RequestBody Invoice invoice) {
 		return saveInvoice(invoice);
 	}
 
 	
-	@DeleteMapping("/invoice/{id}")
+	@DeleteMapping("/{id}")
 		public String deleteInvoice(@PathVariable Integer id) {
 			invoiceRepository.deleteById(id);
 			return "Invoice N "+id+" was deleted.";
