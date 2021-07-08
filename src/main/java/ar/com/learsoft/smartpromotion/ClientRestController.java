@@ -29,16 +29,16 @@ public class ClientRestController {
 	}
 
 	@PatchMapping("/")
-	public Client update(@RequestBody Client clienteUpdate) {
-		Client cliente = clientRepository.findById(clienteUpdate.getId()).get();
-		cliente.setName(clienteUpdate.getName());
-		cliente.setLastname(clienteUpdate.getLastname());
-		return clientRepository.save(cliente);
+	public Client update(@RequestBody Client clientUpdate) {
+		Client client = clientRepository.findById(clientUpdate.getId()).get();
+		client.setName(clientUpdate.getName());
+		client.setLastname(clientUpdate.getLastname());
+		return clientRepository.save(client);
 	}
 	
 	@PostMapping("/")
-	public Client create(@RequestBody Client cliente) {
-		return clientRepository.save(cliente);
+	public Client create(@RequestBody Client client) {
+		return clientRepository.save(client);
 	}
 
 	@GetMapping("/")

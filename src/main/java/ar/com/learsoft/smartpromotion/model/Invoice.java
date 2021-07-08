@@ -40,6 +40,6 @@ public class Invoice {
 	private List<Promotion> promotions;
 	//private Integer cantidad;
 	private String paymentMethod;
-	private String canal;
+	private String channel;
 
 }
