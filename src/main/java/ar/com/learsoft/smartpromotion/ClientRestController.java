@@ -24,8 +24,8 @@ public class ClientRestController {
 
 	@GetMapping("/{id}")
 	public Client readOne(@PathVariable Integer id) {
-		Client cliente = clientRepository.findById(id).get();
-		return cliente;
+		Client client = clientRepository.findById(id).get();
+		return client;
 	}
 
 	@PatchMapping("/")
