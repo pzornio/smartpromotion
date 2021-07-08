@@ -5,32 +5,64 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
 <script>
-	$(document).ready(function() {
+	$(document).ready(function() {	
 		
-		$("#send").click(function() {
-			send("hello");
-		});
-		
-		function send(message) {
-			$.ajax({
+		function getAPI(api_url, successFunc) {
+			return $.ajax({
 				type : "GET",
 				async : true,
-				url : "http://localhost:8080/" + message,
+				url : api_url,
 				success : function(res) {
-					$("#response").html(res);
 					console.log(res);
+					successFunc(res);
 				},
 				error : function(res) {
 					console.log(res);
 				}
 			});
 		}
+		
+		function getClient(id_client) {
+			return getAPI("http://localhost:8050/JavaRest/client/"+id_client,showClientData);	
+		}
+		var showClientData = function showClientData(client){
+			$("#response").html(htmlClientData(client));
+		};
+		
+		
+		function getClientList() {
+			return getAPI("http://localhost:8050/JavaRest/client/",showClientDataList);	
+		}
+		
+		var showClientDataList = function showClientData(clients){
+			var clientHtmlList ="";
+			clients.forEach(function(client) {
+				clientHtmlList += htmlClientData(client);
+			});
+			$("#response").html(clientHtmlList);
+		};
+		
+		var htmlClientData = function htmlClientData(client){
+			var client_html = "<div>"+client.id+"</div>";
+			client_html += "<div>"+client.nombre+"</div>";
+			client_html += "<div>"+client.apellido+"</div>";
+			return client_html
+		};
+		
+		$("#getOneClient").click(function() {
+			client = getClient(2);
+		});
+		
+		$("#getAllClients").click(function() {
+			clientList = getClientList();
+		});
 	});
 </script>
 <title>Java Workshop</title>
 </head>
 <body>
-	<button class="btn btn-success action" type="button" id="send">SEND</button >
+	<button class="btn btn-success action" type="button" id="getOneClient">ONE CLIENT</button >
+	<button class="btn btn-success action" type="button" id="getAllClients">ALL CLIENTS</button >
 	<br>
 	<br>
 	<div id="response"></div>
