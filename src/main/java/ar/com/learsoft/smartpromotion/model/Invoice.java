@@ -27,7 +27,7 @@ import lombok.ToString;
 public class Invoice {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Integer id;
 	@Transient
 	private Client client;
