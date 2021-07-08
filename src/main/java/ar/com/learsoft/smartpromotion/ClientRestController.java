@@ -43,8 +43,8 @@ public class ClientRestController {
 
 	@GetMapping("/")
 	public List<Client> readAll() {
-		List<Client> clientes = clientRepository.findAll();
-		return clientes;
+		List<Client> clients = clientRepository.findAll();
+		return clients;
 	}
 
 	@DeleteMapping("/{id}")
