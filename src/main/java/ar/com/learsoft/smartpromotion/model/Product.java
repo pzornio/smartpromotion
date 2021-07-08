@@ -1,4 +1,4 @@
-package ar.com.learsoft.javaws.model;
+package ar.com.learsoft.smartpromotion.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,14 +20,14 @@ import lombok.ToString;
 @Entity
 @Table(name = "Product")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Producto {
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private String nombre;
-	private String tipo;
-	private Double precio;
-	private String detalle;
+	private String name;
+	private String type;
+	private Double price;
+	private String details;
 
 }

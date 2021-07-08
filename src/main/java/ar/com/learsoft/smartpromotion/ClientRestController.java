@@ -1,4 +1,4 @@
-package ar.com.learsoft.javaws;
+package ar.com.learsoft.smartpromotion;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.com.learsoft.javaws.model.Cliente;
-import ar.com.learsoft.javaws.repository.ClientRepository;
+import ar.com.learsoft.smartpromotion.model.Client;
+import ar.com.learsoft.smartpromotion.repository.ClientRepository;
 
 @RestController
 @RequestMapping("/client")
@@ -23,27 +23,27 @@ public class ClientRestController {
 	private ClientRepository clientRepository;
 
 	@GetMapping("/{id}")
-	public Cliente readOne(@PathVariable Integer id) {
-		Cliente cliente = clientRepository.findById(id).get();
+	public Client readOne(@PathVariable Integer id) {
+		Client cliente = clientRepository.findById(id).get();
 		return cliente;
 	}
 
 	@PatchMapping("/")
-	public Cliente update(@RequestBody Cliente clienteUpdate) {
-		Cliente cliente = clientRepository.findById(clienteUpdate.getId()).get();
-		cliente.setNombre(clienteUpdate.getNombre());
-		cliente.setApellido(clienteUpdate.getApellido());
+	public Client update(@RequestBody Client clienteUpdate) {
+		Client cliente = clientRepository.findById(clienteUpdate.getId()).get();
+		cliente.setName(clienteUpdate.getName());
+		cliente.setLastname(clienteUpdate.getLastname());
 		return clientRepository.save(cliente);
 	}
 	
 	@PostMapping("/")
-	public Cliente create(@RequestBody Cliente cliente) {
+	public Client create(@RequestBody Client cliente) {
 		return clientRepository.save(cliente);
 	}
 
 	@GetMapping("/")
-	public List<Cliente> readAll() {
-		List<Cliente> clientes = clientRepository.findAll();
+	public List<Client> readAll() {
+		List<Client> clientes = clientRepository.findAll();
 		return clientes;
 	}
 

@@ -1,4 +1,4 @@
-package ar.com.learsoft.javaws;
+package ar.com.learsoft.smartpromotion;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

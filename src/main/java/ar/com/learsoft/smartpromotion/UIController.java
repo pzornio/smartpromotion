@@ -1,4 +1,4 @@
-package ar.com.learsoft.javaws;
+package ar.com.learsoft.smartpromotion;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
