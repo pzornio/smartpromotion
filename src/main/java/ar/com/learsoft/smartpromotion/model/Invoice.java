@@ -34,17 +34,18 @@ public class Invoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-    @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Client client;
 	private Date date;
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Product> products;
 	private Double amount;
-	//private String descuento;
+	// private String descuento;
 	@Transient
 	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private List<Promotion> promotions;
-	//private Integer cantidad;
+	// private Integer cantidad;
 	private String paymentMethod;
 	private String channel;
 

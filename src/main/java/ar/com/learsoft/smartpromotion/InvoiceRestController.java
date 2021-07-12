@@ -24,17 +24,14 @@ import ar.com.learsoft.smartpromotion.service.InvoiceService;
 @RequestMapping("/invoiceAPI")
 public class InvoiceRestController {
 
-
 	@Autowired
 	private InvoiceService invoiceService;
-	
-
 
 	@GetMapping("/{id}")
 	public ResponseEntity<DTOInvoice> readOne(@PathVariable Integer id) {
 		DTOInvoice dTOInvoice = new DTOInvoice();
 		try {
-			Invoice invoice= this.invoiceService.findInvoice(id);	
+			Invoice invoice = this.invoiceService.findInvoice(id);
 			dTOInvoice.setInvoice(invoice);
 			dTOInvoice.setMessage(new SmartMessage("OK"));
 			return ResponseEntity.ok().body(dTOInvoice);
@@ -46,7 +43,6 @@ public class InvoiceRestController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dTOInvoice);
 		}
 	}
-	
 
 	@PatchMapping("/")
 	public Invoice update(@RequestBody Invoice invoice) {

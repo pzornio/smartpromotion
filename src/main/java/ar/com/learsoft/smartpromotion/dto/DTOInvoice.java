@@ -6,7 +6,8 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class DTOInvoice extends DTOGeneric{
+
+public class DTOInvoice extends DTOGeneric {
 	private Invoice invoice;
 
 }

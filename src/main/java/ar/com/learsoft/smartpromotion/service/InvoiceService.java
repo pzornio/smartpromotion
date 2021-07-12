@@ -10,10 +10,10 @@ import ar.com.learsoft.smartpromotion.repository.InvoiceRepository;
 
 @Component("invoiceService")
 public class InvoiceService {
-	
+
 	@Autowired
 	private InvoiceRepository invoiceRepository;
-	
+
 	public Invoice updateInvoice(Invoice invoice) {
 		Invoice currentInvoice = this.findInvoice(invoice.getId());
 		currentInvoice.setClient(invoice.getClient());
@@ -22,10 +22,10 @@ public class InvoiceService {
 		currentInvoice.setPromotions(invoice.getPromotions());
 		currentInvoice.setAmount(invoice.getAmount());
 		currentInvoice.setChannel(invoice.getChannel());
-		currentInvoice.setPaymentMethod(invoice.getPaymentMethod());		
+		currentInvoice.setPaymentMethod(invoice.getPaymentMethod());
 		return invoiceRepository.save(currentInvoice);
 	}
-	
+
 	public Invoice findInvoice(Integer idInvoice) {
 		return invoiceRepository.findById(idInvoice).get();
 	}
