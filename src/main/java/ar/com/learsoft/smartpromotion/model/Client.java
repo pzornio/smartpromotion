@@ -22,7 +22,7 @@ import lombok.ToString;
 public class Client {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String lastname;
