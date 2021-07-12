@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.EqualsAndHashCode;
@@ -26,6 +27,8 @@ public class Promotion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Integer id;
+	@JsonIgnore
+	private Integer productId;
 	@Transient
 	private Product product;
 	private String code;

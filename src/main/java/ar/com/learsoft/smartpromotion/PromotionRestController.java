@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.com.learsoft.smartpromotion.model.Client;
+import ar.com.learsoft.smartpromotion.model.Product;
 import ar.com.learsoft.smartpromotion.model.Promotion;
+import ar.com.learsoft.smartpromotion.repository.ProductRepository;
 import ar.com.learsoft.smartpromotion.repository.PromotionRepository;
 
 @RestController
@@ -18,6 +21,7 @@ public class PromotionRestController{
 
 	@Autowired
 	private PromotionRepository promotionRepository;
+	
 
 	private Promotion savePromotion(Promotion promotion) {
 		return promotionRepository.save(promotion);
@@ -26,11 +30,15 @@ public class PromotionRestController{
 	@GetMapping("/{id}")
 	public Promotion readPromotion(@PathVariable Integer id) {
 		Promotion promotion = promotionRepository.getOne(id);
+		
+		
 		return promotion;
 	}
 
 	@PostMapping("")
 	public Promotion createPromotion(@RequestBody Promotion promotion) {
+		Product product = promotion.getProduct();
+		promotion.setProductId(product.getId());
 		return savePromotion(promotion);
 	}
 
