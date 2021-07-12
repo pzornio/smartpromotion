@@ -21,7 +21,7 @@ import ar.com.learsoft.smartpromotion.model.Client;
 import ar.com.learsoft.smartpromotion.service.ClientService;
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping("/clientAPI")
 public class ClientRestController {
 
 	@Autowired
