@@ -47,10 +47,10 @@ public class PromotionRestController{
 	
 
 	@PatchMapping("promotion/")
-	public ResponseEntity<DTOPromotion> update(@PathVariable Promotion promotion) {
+	public ResponseEntity<DTOPromotion> update(@PathVariable DTOPromotion dtoPromotion) {
 		DTOPromotion dTOPromotion = new DTOPromotion();
 		try {
-			Promotion updatedPromotion= this.promotionService.updatePromotion(promotion);
+			Promotion updatedPromotion= this.promotionService.updatePromotion(dtoPromotion);
 			dTOPromotion.setPromotion(updatedPromotion);
 			dTOPromotion.setMessage(new SmartMessage("OK"));
 			return ResponseEntity.ok().body(dTOPromotion);
@@ -64,10 +64,10 @@ public class PromotionRestController{
 	}
 	
 	@PostMapping("promotion/")
-	public ResponseEntity<DTOPromotion> create(@RequestBody Promotion promotion) {
+	public ResponseEntity<DTOPromotion> create(@RequestBody DTOPromotion dtoPromotion) {
 		DTOPromotion dTOPromotion = new DTOPromotion();
 		try {
-			Promotion newPromotion= this.promotionService.createPromotion(promotion);
+			Promotion newPromotion= this.promotionService.createPromotion(dtoPromotion);
 			dTOPromotion.setPromotion(newPromotion);
 			dTOPromotion.setMessage(new SmartMessage("OK"));
 			return ResponseEntity.ok().body(dTOPromotion);
