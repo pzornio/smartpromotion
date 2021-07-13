@@ -1,6 +1,7 @@
 package ar.com.learsoft.smartpromotion.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.com.learsoft.smartpromotion.dto.DTOClient;
 import ar.com.learsoft.smartpromotion.dto.DTOProduct;
 import ar.com.learsoft.smartpromotion.dto.SmartMessage;
+import ar.com.learsoft.smartpromotion.model.Client;
 import ar.com.learsoft.smartpromotion.model.Product;
 import ar.com.learsoft.smartpromotion.service.ProductService;
 
@@ -30,35 +33,63 @@ public class ProductRestController {
 
 	@GetMapping("product/{id}")
 	public ResponseEntity<DTOProduct> readOne(@PathVariable Integer id) {
-		DTOProduct dTOProduct = new DTOProduct();
+		DTOProduct dtoProduct = new DTOProduct();
 		try {
 			Product product= this.productService.findProduct(id);	
-			dTOProduct.setProduct(product);
-			dTOProduct.setMessage(new SmartMessage("OK"));
-			return ResponseEntity.ok().body(dTOProduct);
+			dtoProduct.setProduct(product);
+			dtoProduct.setMessage(new SmartMessage("OK"));
+			return ResponseEntity.ok().body(dtoProduct);
 		} catch (NoSuchElementException e) {
-			dTOProduct.setMessage(new SmartMessage("INVOICE ID NOT FOUND"));
-			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(dTOProduct);
+			dtoProduct.setMessage(new SmartMessage("PRODUCT ID NOT FOUND"));
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(dtoProduct);
 		} catch (Exception e) {
-			dTOProduct.setMessage(new SmartMessage("ERROR INESPERADO"));
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dTOProduct);
+			dtoProduct.setMessage(new SmartMessage("ERROR INESPERADO"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dtoProduct);
 		}
 	}
 	
 
 	@PatchMapping("product/")
-	public Product update(@RequestBody Product product) {
-		return this.productService.updateProduct(product);
+	public ResponseEntity<DTOProduct> update(@RequestBody Product product) {
+		DTOProduct dtoProduct = new DTOProduct();
+		try {
+			Product updatedProduct = this.productService.updateProduct(product);
+			dtoProduct.setProduct(updatedProduct);
+			dtoProduct.setMessage(new SmartMessage("OK"));
+			return ResponseEntity.ok().body(dtoProduct);
+		} catch (NoSuchElementException e) {
+			dtoProduct.setMessage(new SmartMessage("PRODUCT ID NOT FOUND"));
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(dtoProduct);
+		} catch (Exception e) {
+			dtoProduct.setMessage(new SmartMessage("ERROR INESPERADO"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dtoProduct);
+		}
 	}
 
 	@PostMapping("product/")
-	public Product create(@RequestBody Product product) {
-		return this.productService.createProduct(product);
+	public ResponseEntity<DTOProduct> create(@RequestBody Product product) {
+		DTOProduct dtoProduct = new DTOProduct();
+		try {
+			Product newProduct = this.productService.createProduct(product);
+			dtoProduct.setProduct(newProduct);
+			dtoProduct.setMessage(new SmartMessage("OK"));
+			return ResponseEntity.ok().body(dtoProduct);
+		} catch (Exception e) {
+			dtoProduct.setMessage(new SmartMessage("ERROR INESPERADO"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dtoProduct);
+		}
 	}
-
+	
 	@GetMapping("product/")
-	public List<Product> readAll() {
-		return this.productService.findAllProducts();
+	public ResponseEntity<List<DTOProduct>> readAll() {
+		ArrayList<DTOProduct> dtoProducts = new ArrayList<>();
+		List<Product> products = this.productService.findAllProducts();
+		for (Product product : products) {
+			DTOProduct dtoProduct = new DTOProduct();
+			dtoProduct.setProduct(product);
+			dtoProduct.setMessage(new SmartMessage("OK"));
+		}
+		return ResponseEntity.ok().body(dtoProducts);
 	}
 
 	@DeleteMapping("product/{id}")
