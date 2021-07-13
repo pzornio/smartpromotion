@@ -1,14 +1,19 @@
 package ar.com.learsoft.smartpromotion.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -32,21 +37,19 @@ import lombok.ToString;
 public class Invoice {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@JsonIgnore
-	private Integer clientId;
-	@Transient	
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Client client;
 	private Date date;
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToMany
 	private List<Product> products;
 	private Double amount;
-	//private String descuento;
+	private String descuento;
 	@Transient
 	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private List<Promotion> promotions;
-	//private Integer cantidad;
+	private Integer cantidad;
 	private String paymentMethod;
 	private String channel;
 
