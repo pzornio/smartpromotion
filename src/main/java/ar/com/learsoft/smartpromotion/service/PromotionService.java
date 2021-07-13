@@ -18,7 +18,6 @@ public class PromotionService {
 		Promotion currentPromotion = this.findPromotion(promotion.getId());
 		currentPromotion.setProduct(promotion.getProduct());
 		currentPromotion.setCode(promotion.getCode());
-		currentPromotion.setAmount(promotion.getAmount());
 		currentPromotion.setDiscount(promotion.getDiscount());
 		return promotionRepository.save(currentPromotion);
 	}

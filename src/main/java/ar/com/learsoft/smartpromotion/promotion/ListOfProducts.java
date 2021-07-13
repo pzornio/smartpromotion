@@ -1,13 +1,13 @@
 package ar.com.learsoft.smartpromotion.promotion;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import ar.com.learsoft.smartpromotion.model.Invoice;
 import ar.com.learsoft.smartpromotion.model.Product;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 @Setter
 @Getter

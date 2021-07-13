@@ -1,4 +1,4 @@
-package ar.com.learsoft.smartpromotion;
+package ar.com.learsoft.smartpromotion.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -21,13 +21,13 @@ import ar.com.learsoft.smartpromotion.model.Promotion;
 import ar.com.learsoft.smartpromotion.service.PromotionService;
 
 @RestController
-@RequestMapping("/promotionAPI")
+@RequestMapping("/API_PROMOTION/")
 public class PromotionRestController{
 
 	@Autowired
 	private PromotionService promotionService;
 
-	@GetMapping("/{id}")
+	@GetMapping("promotion/{id}")
 	public ResponseEntity<DTOPromotion> readOne(@PathVariable Integer id) {
 		DTOPromotion dTOPromotion = new DTOPromotion();
 		try {
@@ -45,22 +45,22 @@ public class PromotionRestController{
 	}
 	
 
-	@PatchMapping("/")
+	@PatchMapping("promotion/")
 	public Promotion update(@RequestBody Promotion promotion) {
 		return this.promotionService.updatePromotion(promotion);
 	}
 
-	@PostMapping("/")
+	@PostMapping("promotion/")
 	public Promotion create(@RequestBody Promotion promotion) {
 		return this.promotionService.createPromotion(promotion);
 	}
 
-	@GetMapping("/")
+	@GetMapping("promotion/")
 	public List<Promotion> readAll() {
 		return this.promotionService.findAllPromotions();
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("promotion/{id}")
 	public String delete(@PathVariable Integer id) {
 		return this.promotionService.deletePromotion(id);
 	}

@@ -20,7 +20,7 @@ public class DTOInvoice extends DTOGeneric {
 	private Date date;
 	private Double amount;
 	private String descuento;
-	private Integer cantidad;
+	private Integer itemCount;
 	private String paymentMethod;
 	private String channel;
 	
@@ -35,7 +35,7 @@ public class DTOInvoice extends DTOGeneric {
 		this.date = invoice.getDate();
 		this.amount = invoice.getAmount();
 		this.descuento = invoice.getDescuento();
-		this.cantidad = invoice.getCantidad();
+		this.itemCount = invoice.getItemCount();
 		this.paymentMethod = invoice.getPaymentMethod();
 		this.channel = invoice.getChannel();
 	}

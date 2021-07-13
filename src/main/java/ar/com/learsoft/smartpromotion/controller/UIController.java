@@ -1,4 +1,4 @@
-package ar.com.learsoft.smartpromotion;
+package ar.com.learsoft.smartpromotion.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package ar.com.learsoft.smartpromotion;
+package ar.com.learsoft.smartpromotion.controller;
 
 
 import java.util.List;
@@ -22,13 +22,13 @@ import ar.com.learsoft.smartpromotion.model.Product;
 import ar.com.learsoft.smartpromotion.service.ProductService;
 
 @RestController
-@RequestMapping("/productAPI")
+@RequestMapping("/API_INVOICE/")
 public class ProductRestController {
 
 	@Autowired
 	private ProductService productService;
 
-	@GetMapping("/{id}")
+	@GetMapping("product/{id}")
 	public ResponseEntity<DTOProduct> readOne(@PathVariable Integer id) {
 		DTOProduct dTOProduct = new DTOProduct();
 		try {
@@ -46,22 +46,22 @@ public class ProductRestController {
 	}
 	
 
-	@PatchMapping("/")
+	@PatchMapping("product/")
 	public Product update(@RequestBody Product product) {
 		return this.productService.updateProduct(product);
 	}
 
-	@PostMapping("/")
+	@PostMapping("product/")
 	public Product create(@RequestBody Product product) {
 		return this.productService.createProduct(product);
 	}
 
-	@GetMapping("/")
+	@GetMapping("product/")
 	public List<Product> readAll() {
 		return this.productService.findAllProducts();
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("product/{id}")
 	public String delete(@PathVariable Integer id) {
 		return this.productService.deleteProduct(id);
 	}
