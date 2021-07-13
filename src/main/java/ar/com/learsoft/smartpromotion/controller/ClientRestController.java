@@ -46,10 +46,9 @@ public class ClientRestController {
 	}
 
 	@PatchMapping("client/")
-	public ResponseEntity<DTOClient> update(@RequestBody DTOClient client) {
-		DTOClient dtoClient = new DTOClient();
+	public ResponseEntity<DTOClient> update(@RequestBody DTOClient dtoClient) {
 		try {
-			Client updatedClient = this.clientService.updateClient(client);
+			Client updatedClient = this.clientService.updateClient(dtoClient);
 			dtoClient.setClient(updatedClient);
 			dtoClient.setMessage(new SmartMessage("OK"));
 			return ResponseEntity.ok().body(dtoClient);
@@ -63,10 +62,9 @@ public class ClientRestController {
 	}
 
 	@PostMapping("client/")
-	public ResponseEntity<DTOClient> create(@RequestBody DTOClient client) {
-		DTOClient dtoClient = new DTOClient();
+	public ResponseEntity<DTOClient> create(@RequestBody DTOClient dtoClient) {
 		try {
-			Client newClient = this.clientService.createClient(client);
+			Client newClient = this.clientService.createClient(dtoClient);
 			dtoClient.setClient(newClient);
 			dtoClient.setMessage(new SmartMessage("OK"));
 			return ResponseEntity.ok().body(dtoClient);
