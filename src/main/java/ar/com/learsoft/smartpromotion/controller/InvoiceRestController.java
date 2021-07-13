@@ -1,5 +1,6 @@
 package ar.com.learsoft.smartpromotion.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -29,34 +30,60 @@ public class InvoiceRestController {
 
 	@GetMapping("invoice/{id}")
 	public ResponseEntity<DTOInvoice> readOne(@PathVariable Integer id) {
-		DTOInvoice dTOInvoice = new DTOInvoice();
+		DTOInvoice dtoInvoice = new DTOInvoice();
 		try {
 			Invoice invoice = this.invoiceService.findInvoice(id);
-			dTOInvoice.setInvoice(invoice);
-			dTOInvoice.setMessage(new SmartMessage("OK"));
-			return ResponseEntity.ok().body(dTOInvoice);
+			dtoInvoice.setInvoice(invoice);
+			dtoInvoice.setMessage(new SmartMessage("OK"));
+			return ResponseEntity.ok().body(dtoInvoice);
 		} catch (NoSuchElementException e) {
-			dTOInvoice.setMessage(new SmartMessage("INVOICE ID NOT FOUND"));
-			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(dTOInvoice);
+			dtoInvoice.setMessage(new SmartMessage("INVOICE ID NOT FOUND"));
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(dtoInvoice);
 		} catch (Exception e) {
-			dTOInvoice.setMessage(new SmartMessage("ERROR INESPERADO"));
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dTOInvoice);
+			dtoInvoice.setMessage(new SmartMessage("ERROR INESPERADO"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dtoInvoice);
 		}
 	}
 
 	@PatchMapping("invoice/")
-	public Invoice update(@RequestBody Invoice invoice) {
-		return this.invoiceService.updateInvoice(invoice);
+	public ResponseEntity<DTOInvoice> update(@RequestBody DTOInvoice dtoInvoice) {
+		try {
+			Invoice invoice = this.invoiceService.updateInvoice(dtoInvoice);
+			dtoInvoice.setInvoice(invoice);
+			dtoInvoice.setMessage(new SmartMessage("OK"));
+			return ResponseEntity.ok().body(dtoInvoice);
+		} catch (NoSuchElementException e) {
+			dtoInvoice.setMessage(new SmartMessage("INVOICE ID NOT FOUND"));
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(dtoInvoice);
+		} catch (Exception e) {
+			dtoInvoice.setMessage(new SmartMessage("ERROR INESPERADO"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dtoInvoice);
+		}
 	}
 
 	@PostMapping("invoice/")
-	public Invoice create(@RequestBody Invoice invoice) {
-		return this.invoiceService.createInvoice(invoice);
+	public ResponseEntity<DTOInvoice> create(@RequestBody DTOInvoice dtoInvoice) {
+		try {
+			Invoice invoice = this.invoiceService.createInvoice(dtoInvoice);
+			dtoInvoice.setInvoice(invoice);
+			dtoInvoice.setMessage(new SmartMessage("OK"));
+			return ResponseEntity.ok().body(dtoInvoice);
+		} catch (Exception e) {
+			dtoInvoice.setMessage(new SmartMessage("ERROR INESPERADO"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dtoInvoice);
+		}
 	}
 
 	@GetMapping("invoice/")
-	public List<Invoice> readAll() {
-		return this.invoiceService.findAllInvoices();
+	public ResponseEntity<List<DTOInvoice>> readAll() {
+		ArrayList<DTOInvoice> dtoInvoices = new ArrayList<>();
+		List<Invoice> invoices = this.invoiceService.findAllInvoices();
+		for (Invoice invoice : invoices) {
+			DTOInvoice dtoInvoice = new DTOInvoice();
+			dtoInvoice.setInvoice(invoice);
+			dtoInvoice.setMessage(new SmartMessage("OK"));
+		}
+		return ResponseEntity.ok().body(dtoInvoices);
 	}
 
 	@DeleteMapping("invoice/{id}")

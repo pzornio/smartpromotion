@@ -46,7 +46,7 @@ public class ClientRestController {
 	}
 
 	@PatchMapping("client/")
-	public ResponseEntity<DTOClient> update(@RequestBody Client client) {
+	public ResponseEntity<DTOClient> update(@RequestBody DTOClient client) {
 		DTOClient dtoClient = new DTOClient();
 		try {
 			Client updatedClient = this.clientService.updateClient(client);
@@ -63,7 +63,7 @@ public class ClientRestController {
 	}
 
 	@PostMapping("client/")
-	public ResponseEntity<DTOClient> create(@RequestBody Client client) {
+	public ResponseEntity<DTOClient> create(@RequestBody DTOClient client) {
 		DTOClient dtoClient = new DTOClient();
 		try {
 			Client newClient = this.clientService.createClient(client);

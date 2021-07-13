@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import ar.com.learsoft.smartpromotion.dto.DTOClient;
 import ar.com.learsoft.smartpromotion.model.Client;
 import ar.com.learsoft.smartpromotion.repository.ClientRepository;
 
@@ -14,10 +15,10 @@ public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 	
-	public Client updateClient(Client client) {
-		Client currentClient = this.findClient(client.getId());
-		currentClient.setName(client.getName());
-		currentClient.setLastname(client.getLastname());
+	public Client updateClient(DTOClient dtoClient) {
+		Client currentClient = this.findClient(dtoClient.getId());
+		currentClient.setName(dtoClient.getName());
+		currentClient.setLastname(dtoClient.getLastname());
 		return clientRepository.save(currentClient);
 	}
 	
@@ -25,7 +26,8 @@ public class ClientService {
 		return clientRepository.findById(idClient).get();
 	}
 
-	public Client createClient(Client client) {
+	public Client createClient(DTOClient dtoClient) {
+		Client client =dtoClient.getClient();
 		return clientRepository.save(client);
 	}
 

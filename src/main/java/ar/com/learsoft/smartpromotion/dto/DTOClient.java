@@ -16,4 +16,13 @@ public class DTOClient extends DTOGeneric{
 		this.name = client.getName();
 		this.lastname = client.getLastname();	
 	}
+
+
+	public Client getClient() {
+		Client client = new Client();
+		client.setId(this.id);
+		client.setLastname(this.lastname);
+		client.setName(this.name);
+		return client;
+	}
 }

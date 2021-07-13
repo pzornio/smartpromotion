@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.com.learsoft.smartpromotion.dto.DTOClient;
 import ar.com.learsoft.smartpromotion.dto.DTOProduct;
 import ar.com.learsoft.smartpromotion.dto.SmartMessage;
-import ar.com.learsoft.smartpromotion.model.Client;
 import ar.com.learsoft.smartpromotion.model.Product;
 import ar.com.learsoft.smartpromotion.service.ProductService;
 

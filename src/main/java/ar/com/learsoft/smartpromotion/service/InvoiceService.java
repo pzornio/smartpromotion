@@ -1,13 +1,16 @@
 package ar.com.learsoft.smartpromotion.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import ar.com.learsoft.smartpromotion.dto.DTOInvoice;
 import ar.com.learsoft.smartpromotion.model.Client;
 import ar.com.learsoft.smartpromotion.model.Invoice;
-import ar.com.learsoft.smartpromotion.repository.ClientRepository;
+import ar.com.learsoft.smartpromotion.model.Product;
+import ar.com.learsoft.smartpromotion.model.Promotion;
 import ar.com.learsoft.smartpromotion.repository.InvoiceRepository;
 
 @Component("invoiceService")
@@ -16,17 +19,15 @@ public class InvoiceService {
 	@Autowired
 	private InvoiceRepository invoiceRepository;
 	@Autowired
-	private ClientRepository clientRepository;
+	private ClientService clientService;
+	@Autowired
+	private PromotionService promotionService;
+	@Autowired
+	private ProductService productService;
 
-	public Invoice updateInvoice(Invoice invoice) {
-		Invoice currentInvoice = this.findInvoice(invoice.getId());
-		currentInvoice.setClient(invoice.getClient());
-		currentInvoice.setProducts(invoice.getProducts());
-		currentInvoice.setDate(invoice.getDate());
-		currentInvoice.setPromotions(invoice.getPromotions());
-		currentInvoice.setAmount(invoice.getAmount());
-		currentInvoice.setChannel(invoice.getChannel());
-		currentInvoice.setPaymentMethod(invoice.getPaymentMethod());
+	public Invoice updateInvoice(DTOInvoice dtoInvoice) {
+		Invoice currentInvoice = this.findInvoice(dtoInvoice.getInvoiceId());
+		this.buildDTO(currentInvoice, dtoInvoice);
 		return invoiceRepository.save(currentInvoice);
 	}
 
@@ -34,9 +35,9 @@ public class InvoiceService {
 		return invoiceRepository.findById(idInvoice).get();
 	}
 
-	public Invoice createInvoice(Invoice invoice) {
-		Client client = this.clientRepository.findById(invoice.getClient().getId()).get();
-		invoice.setClient(client);
+	public Invoice createInvoice(DTOInvoice dtoInvoice) {
+		Invoice invoice = new Invoice();
+		this.buildDTO(invoice, dtoInvoice);
 		return invoiceRepository.save(invoice);
 	}
 
@@ -47,6 +48,31 @@ public class InvoiceService {
 	public String deleteInvoice(Integer id) {
 		invoiceRepository.deleteById(id);
 		return "Invoice Deleted  " + id;
+	}
+	
+	private Invoice buildDTO(Invoice invoice, DTOInvoice dtoInvoice) {
+		Client client = clientService.findClient(dtoInvoice.getClientId());
+		invoice.setClient(client);
+
+		List<Integer> promotionIds = dtoInvoice.getPromotionIds();
+		ArrayList<Promotion> promotions = new ArrayList<>();
+		for (Integer promotionId : promotionIds) {
+			Promotion promotion = promotionService.findPromotion(promotionId);
+			promotions.add(promotion);
+		}
+		invoice.setPromotions(promotions);	
+		List<Integer> productIds = dtoInvoice.getProductIds();
+		ArrayList<Product> products = new ArrayList<>();
+		for (Integer productId : productIds) {
+			Product product = productService.findProduct(productId);
+			products.add(product);
+		}
+		invoice.setProducts(products);	
+		invoice.setDate(dtoInvoice.getDate());	
+		invoice.setAmount(dtoInvoice.getAmount());
+		invoice.setChannel(dtoInvoice.getChannel());
+		invoice.setPaymentMethod(dtoInvoice.getPaymentMethod());
+		return invoice;
 	}
 
 }
