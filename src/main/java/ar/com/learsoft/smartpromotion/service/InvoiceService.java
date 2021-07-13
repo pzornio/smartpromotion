@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import ar.com.learsoft.smartpromotion.model.Client;
 import ar.com.learsoft.smartpromotion.model.Invoice;
+import ar.com.learsoft.smartpromotion.repository.ClientRepository;
 import ar.com.learsoft.smartpromotion.repository.InvoiceRepository;
 
 @Component("invoiceService")
@@ -13,6 +15,8 @@ public class InvoiceService {
 
 	@Autowired
 	private InvoiceRepository invoiceRepository;
+	@Autowired
+	private ClientRepository clientRepository;
 
 	public Invoice updateInvoice(Invoice invoice) {
 		Invoice currentInvoice = this.findInvoice(invoice.getId());
@@ -31,6 +35,8 @@ public class InvoiceService {
 	}
 
 	public Invoice createInvoice(Invoice invoice) {
+		Client client=this.clientRepository.findById(invoice.getClient().getId()).get();
+		invoice.setClient(client);
 		return invoiceRepository.save(invoice);
 	}
 

@@ -7,5 +7,5 @@ import ar.com.learsoft.smartpromotion.model.Invoice;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
-
+	
 }
