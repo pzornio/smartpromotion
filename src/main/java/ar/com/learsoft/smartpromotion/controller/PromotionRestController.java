@@ -1,5 +1,6 @@
 package ar.com.learsoft.smartpromotion.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.com.learsoft.smartpromotion.dto.DTOClient;
 import ar.com.learsoft.smartpromotion.dto.DTOPromotion;
 import ar.com.learsoft.smartpromotion.dto.SmartMessage;
+import ar.com.learsoft.smartpromotion.model.Client;
 import ar.com.learsoft.smartpromotion.model.Promotion;
 import ar.com.learsoft.smartpromotion.service.PromotionService;
 
@@ -36,7 +39,7 @@ public class PromotionRestController{
 			dTOPromotion.setMessage(new SmartMessage("OK"));
 			return ResponseEntity.ok().body(dTOPromotion);
 		} catch (NoSuchElementException e) {
-			dTOPromotion.setMessage(new SmartMessage("INVOICE ID NOT FOUND"));
+			dTOPromotion.setMessage(new SmartMessage("PROMOTION ID NOT FOUND"));
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(dTOPromotion);
 		} catch (Exception e) {
 			dTOPromotion.setMessage(new SmartMessage("ERROR INESPERADO"));
@@ -46,18 +49,46 @@ public class PromotionRestController{
 	
 
 	@PatchMapping("promotion/")
-	public Promotion update(@RequestBody Promotion promotion) {
-		return this.promotionService.updatePromotion(promotion);
+	public ResponseEntity<DTOPromotion> update(@PathVariable Promotion promotion) {
+		DTOPromotion dTOPromotion = new DTOPromotion();
+		try {
+			Promotion updatedPromotion= this.promotionService.updatePromotion(promotion);
+			dTOPromotion.setPromotion(updatedPromotion);
+			dTOPromotion.setMessage(new SmartMessage("OK"));
+			return ResponseEntity.ok().body(dTOPromotion);
+		} catch (NoSuchElementException e) {
+			dTOPromotion.setMessage(new SmartMessage("PROMOTION ID NOT FOUND"));
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(dTOPromotion);
+		} catch (Exception e) {
+			dTOPromotion.setMessage(new SmartMessage("ERROR INESPERADO"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dTOPromotion);
+		}
 	}
-
+	
 	@PostMapping("promotion/")
-	public Promotion create(@RequestBody Promotion promotion) {
-		return this.promotionService.createPromotion(promotion);
+	public ResponseEntity<DTOPromotion> create(@RequestBody Promotion promotion) {
+		DTOPromotion dTOPromotion = new DTOPromotion();
+		try {
+			Promotion newPromotion= this.promotionService.createPromotion(promotion);
+			dTOPromotion.setPromotion(newPromotion);
+			dTOPromotion.setMessage(new SmartMessage("OK"));
+			return ResponseEntity.ok().body(dTOPromotion);
+		} catch (Exception e) {
+			dTOPromotion.setMessage(new SmartMessage("ERROR INESPERADO"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dTOPromotion);
+		}
 	}
-
+	
 	@GetMapping("promotion/")
-	public List<Promotion> readAll() {
-		return this.promotionService.findAllPromotions();
+	public ResponseEntity<List<DTOPromotion>> readAll() {
+		ArrayList<DTOPromotion> dtoPromotions = new ArrayList<>();
+		List<Promotion> promotions = this.promotionService.findAllPromotions();
+		for (Promotion promotion : promotions) {
+			DTOPromotion dtoPromotion = new DTOPromotion();
+			dtoPromotion.setPromotion(promotion);
+			dtoPromotion.setMessage(new SmartMessage("OK"));
+		}
+		return ResponseEntity.ok().body(dtoPromotions);
 	}
 
 	@DeleteMapping("promotion/{id}")
