@@ -8,6 +8,18 @@ import lombok.Setter;
 @Setter
 
 public class DTOProduct extends DTOGeneric{
-	private Product product;
-
+	private Integer id;
+	private String name;
+	private String type;
+	private Double price;
+	private String details;
+	
+	public void setProduct(Product product) {
+		this.id = product.getId();
+		this.name = product.getName();
+		this.type = product.getType();
+		this.price = product.getPrice();
+		this.details = product.getDetails();
+	}
+	
 }

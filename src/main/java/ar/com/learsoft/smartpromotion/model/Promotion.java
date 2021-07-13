@@ -20,7 +20,6 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "Promotion")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Promotion {
 
 	@Id
@@ -29,6 +28,5 @@ public class Promotion {
 	@Transient
 	private Product product;
 	private String code;
-	private Integer amount;
 	private Integer discount;
 }

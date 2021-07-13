@@ -1,4 +1,4 @@
-package ar.com.learsoft.smartpromotion;
+package ar.com.learsoft.smartpromotion.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -21,13 +21,13 @@ import ar.com.learsoft.smartpromotion.model.Invoice;
 import ar.com.learsoft.smartpromotion.service.InvoiceService;
 
 @RestController
-@RequestMapping("/invoiceAPI")
+@RequestMapping("/API_INVOICE/")
 public class InvoiceRestController {
 
 	@Autowired
 	private InvoiceService invoiceService;
 
-	@GetMapping("/{id}")
+	@GetMapping("invoice/{id}")
 	public ResponseEntity<DTOInvoice> readOne(@PathVariable Integer id) {
 		DTOInvoice dTOInvoice = new DTOInvoice();
 		try {
@@ -44,22 +44,22 @@ public class InvoiceRestController {
 		}
 	}
 
-	@PatchMapping("/")
+	@PatchMapping("invoice/")
 	public Invoice update(@RequestBody Invoice invoice) {
 		return this.invoiceService.updateInvoice(invoice);
 	}
 
-	@PostMapping("/")
+	@PostMapping("invoice/")
 	public Invoice create(@RequestBody Invoice invoice) {
 		return this.invoiceService.createInvoice(invoice);
 	}
 
-	@GetMapping("/")
+	@GetMapping("invoice/")
 	public List<Invoice> readAll() {
 		return this.invoiceService.findAllInvoices();
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("invoice/{id}")
 	public String delete(@PathVariable Integer id) {
 		return this.invoiceService.deleteInvoice(id);
 	}
