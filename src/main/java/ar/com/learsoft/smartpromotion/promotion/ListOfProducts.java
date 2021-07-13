@@ -16,22 +16,22 @@ public class ListOfProducts {
 	private List<Invoice> invoices;
 	private Invoice invoice;
 	
-	public List<HashMap<String, Integer>> quantityOfProducts() {
+	public List<HashMap<Product, Integer>> quantityOfProducts() {
 
-		List<HashMap<String, Integer>> quantityOfInvoice= new ArrayList<HashMap<String,Integer>>();
+		List<HashMap<Product, Integer>> quantityOfInvoice= new ArrayList<HashMap<Product,Integer>>();
 		
 		for (Invoice invoice2 : invoices) {
 			this.invoice= invoice2;
-			HashMap<String, Integer> quantityOfProducts= new HashMap<String, Integer>();
+			HashMap<Product, Integer> quantityOfProducts= new HashMap<Product, Integer>();
 			List<Product> products= this.invoice.getProducts();
 			
 			
 			for (Product product : products) {
-				if(quantityOfProducts.containsKey(product.getName())) {
-					quantityOfProducts.put(product.getName(), (quantityOfProducts.get(product.getName())+1));
+				if(quantityOfProducts.containsKey(product)) {
+					quantityOfProducts.put(product, (quantityOfProducts.get(product)+1));
 					
 				}else {
-					quantityOfProducts.put(product.getName(), 1);
+					quantityOfProducts.put(product, 1);
 				}
 				
 			}
