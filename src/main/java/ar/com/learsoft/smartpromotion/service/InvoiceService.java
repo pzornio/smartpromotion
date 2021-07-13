@@ -27,7 +27,7 @@ public class InvoiceService {
 
 	public Invoice updateInvoice(DTOInvoice dtoInvoice) {
 		Invoice currentInvoice = this.findInvoice(dtoInvoice.getInvoiceId());
-		this.buildDTO(currentInvoice, dtoInvoice);
+		this.buildInvoice(currentInvoice, dtoInvoice);
 		return invoiceRepository.save(currentInvoice);
 	}
 
@@ -37,7 +37,7 @@ public class InvoiceService {
 
 	public Invoice createInvoice(DTOInvoice dtoInvoice) {
 		Invoice invoice = new Invoice();
-		this.buildDTO(invoice, dtoInvoice);
+		this.buildInvoice(invoice, dtoInvoice);
 		return invoiceRepository.save(invoice);
 	}
 
@@ -50,17 +50,19 @@ public class InvoiceService {
 		return "Invoice Deleted  " + id;
 	}
 	
-	private Invoice buildDTO(Invoice invoice, DTOInvoice dtoInvoice) {
+	private Invoice buildInvoice(Invoice invoice, DTOInvoice dtoInvoice) {
 		Client client = clientService.findClient(dtoInvoice.getClientId());
 		invoice.setClient(client);
 
 		List<Integer> promotionIds = dtoInvoice.getPromotionIds();
-		ArrayList<Promotion> promotions = new ArrayList<>();
-		for (Integer promotionId : promotionIds) {
-			Promotion promotion = promotionService.findPromotion(promotionId);
-			promotions.add(promotion);
-		}
-		invoice.setPromotions(promotions);	
+		if(promotionIds != null) {
+			ArrayList<Promotion> promotions = new ArrayList<>();
+			for (Integer promotionId : promotionIds) {
+				Promotion promotion = promotionService.findPromotion(promotionId);
+				promotions.add(promotion);
+			}
+			invoice.setPromotions(promotions);	
+		}		
 		List<Integer> productIds = dtoInvoice.getProductIds();
 		ArrayList<Product> products = new ArrayList<>();
 		for (Integer productId : productIds) {
@@ -71,6 +73,8 @@ public class InvoiceService {
 		invoice.setDate(dtoInvoice.getDate());	
 		invoice.setAmount(dtoInvoice.getAmount());
 		invoice.setChannel(dtoInvoice.getChannel());
+		invoice.setDescuento(dtoInvoice.getDescuento());
+		invoice.setItemCount(dtoInvoice.getItemCount());
 		invoice.setPaymentMethod(dtoInvoice.getPaymentMethod());
 		return invoice;
 	}

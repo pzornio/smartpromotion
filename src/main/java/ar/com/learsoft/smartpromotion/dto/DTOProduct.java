@@ -22,7 +22,7 @@ public class DTOProduct extends DTOGeneric {
 		this.details = product.getDetails();
 	}
 
-	public Product getProduct() {
+	public Product buildProduct() {
 		Product product = new Product();
 		product.setId(this.id);
 		product.setName(this.name);

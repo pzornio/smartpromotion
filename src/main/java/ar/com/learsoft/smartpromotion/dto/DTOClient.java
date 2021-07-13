@@ -18,7 +18,7 @@ public class DTOClient extends DTOGeneric{
 	}
 
 
-	public Client getClient() {
+	public Client buildClient() {
 		Client client = new Client();
 		client.setId(this.id);
 		client.setLastname(this.lastname);

@@ -13,7 +13,7 @@ import lombok.ToString;
 
 @Setter
 @Getter
-@ToString 
+@ToString
 public class DTOInvoice extends DTOGeneric {
 	private Integer invoiceId;
 	private Integer clientId;
@@ -25,8 +25,7 @@ public class DTOInvoice extends DTOGeneric {
 	private Integer itemCount;
 	private String paymentMethod;
 	private String channel;
-	
-	
+
 	public void setInvoice(Invoice invoice) {
 		this.invoiceId = invoice.getId();
 		this.clientId = invoice.getClient().getId();
@@ -35,8 +34,10 @@ public class DTOInvoice extends DTOGeneric {
 			productIds.add(product.getId());
 		}
 		this.promotionIds = new ArrayList<>();
-		for (Promotion promotion : invoice.getPromotions()) {
-			promotionIds.add(promotion.getId());
+		if (invoice.getPromotions() != null) {
+			for (Promotion promotion : invoice.getPromotions()) {
+				promotionIds.add(promotion.getId());
+			}
 		}
 		this.date = invoice.getDate();
 		this.amount = invoice.getAmount();

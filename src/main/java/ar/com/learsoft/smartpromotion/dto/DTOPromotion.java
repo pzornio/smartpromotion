@@ -1,5 +1,6 @@
 package ar.com.learsoft.smartpromotion.dto;
 
+import ar.com.learsoft.smartpromotion.model.Product;
 import ar.com.learsoft.smartpromotion.model.Promotion;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,14 @@ public class DTOPromotion extends DTOGeneric{
 		this.productId = promotion.getProduct().getId();
 		this.code = promotion.getCode();
 		this.discount = promotion.getDiscount();
+	}
+	
+	public Promotion buildPromotion() {
+		Promotion promotion = new Promotion();
+		promotion.setId(this.id);
+		promotion.setCode(this.code);
+		promotion.setDiscount(this.discount);
+		return promotion;
 	}
 
 }

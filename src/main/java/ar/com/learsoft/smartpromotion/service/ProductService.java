@@ -29,7 +29,7 @@ public class ProductService {
 	}
 
 	public Product createProduct(DTOProduct dtoProduct) {
-		Product product = dtoProduct.getProduct();
+		Product product = dtoProduct.buildProduct();
 		return productRepository.save(product);
 	}
 

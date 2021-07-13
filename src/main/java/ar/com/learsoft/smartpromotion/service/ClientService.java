@@ -27,7 +27,7 @@ public class ClientService {
 	}
 
 	public Client createClient(DTOClient dtoClient) {
-		Client client =dtoClient.getClient();
+		Client client =dtoClient.buildClient();
 		return clientRepository.save(client);
 	}
 

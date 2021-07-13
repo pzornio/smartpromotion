@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ar.com.learsoft.smartpromotion.dto.DTOPromotion;
+import ar.com.learsoft.smartpromotion.model.Product;
 import ar.com.learsoft.smartpromotion.model.Promotion;
 import ar.com.learsoft.smartpromotion.repository.PromotionRepository;
 
@@ -14,10 +15,12 @@ public class PromotionService {
 	
 	@Autowired
 	private PromotionRepository promotionRepository;
+	@Autowired
+	private ProductService productService;
 	
 	public Promotion updatePromotion(DTOPromotion dtoPromotion) {
 		Promotion currentPromotion = this.findPromotion(dtoPromotion.getId());
-		currentPromotion.setProduct(dtoPromotion.getProductId());
+		currentPromotion.setProduct(this.productService.findProduct(dtoPromotion.getProductId()));
 		currentPromotion.setCode(dtoPromotion.getCode());
 		currentPromotion.setDiscount(dtoPromotion.getDiscount());
 		return promotionRepository.save(currentPromotion);
@@ -28,7 +31,9 @@ public class PromotionService {
 	}
 
 	public Promotion createPromotion(DTOPromotion dtoPromotion) {
-		return promotionRepository.save(dtoPromotion);
+		Promotion promotion = dtoPromotion.buildPromotion();
+		promotion.setProduct(this.productService.findProduct(dtoPromotion.getProductId()));
+		return promotionRepository.save(promotion);
 	}
 
 	public List<Promotion> findAllPromotions() {

@@ -69,6 +69,7 @@ public class InvoiceRestController {
 			dtoInvoice.setMessage(new SmartMessage("OK"));
 			return ResponseEntity.ok().body(dtoInvoice);
 		} catch (Exception e) {
+			e.printStackTrace();
 			dtoInvoice.setMessage(new SmartMessage("ERROR INESPERADO"));
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dtoInvoice);
 		}
