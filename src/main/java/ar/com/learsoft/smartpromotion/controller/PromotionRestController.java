@@ -93,5 +93,10 @@ public class PromotionRestController{
 	public String delete(@PathVariable Integer id) {
 		return this.promotionService.deletePromotion(id);
 	}
+	
+//	@GetMapping("promotion/client/{clientId}")
+//	public ResponseEntity<List<DTOPromotion>> findClientPromotion(@PathVariable Integer clientId) {
+//		
+//	}
 
 }
