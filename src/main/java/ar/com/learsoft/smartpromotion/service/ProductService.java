@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import ar.com.learsoft.smartpromotion.dto.DTOProduct;
 import ar.com.learsoft.smartpromotion.model.Product;
 import ar.com.learsoft.smartpromotion.repository.ProductRepository;
 
@@ -13,21 +14,22 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
-	
-	public Product updateProduct(Product product) {
-		Product currentProduct = this.findProduct(product.getId());
-		currentProduct.setName(product.getName());
-		currentProduct.setType(product.getType());
-		currentProduct.setDetails(product.getDetails());
-		currentProduct.setPrice(product.getPrice());
+
+	public Product updateProduct(DTOProduct dtoproduct) {
+		Product currentProduct = this.findProduct(dtoproduct.getId());
+		currentProduct.setName(dtoproduct.getName());
+		currentProduct.setType(dtoproduct.getType());
+		currentProduct.setDetails(dtoproduct.getDetails());
+		currentProduct.setPrice(dtoproduct.getPrice());
 		return productRepository.save(currentProduct);
 	}
-	
+
 	public Product findProduct(Integer idProduct) {
 		return productRepository.findById(idProduct).get();
 	}
 
-	public Product createProduct(Product product) {
+	public Product createProduct(DTOProduct dtoProduct) {
+		Product product = dtoProduct.getProduct();
 		return productRepository.save(product);
 	}
 

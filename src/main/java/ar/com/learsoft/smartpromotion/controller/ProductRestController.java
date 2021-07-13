@@ -48,10 +48,9 @@ public class ProductRestController {
 	
 
 	@PatchMapping("product/")
-	public ResponseEntity<DTOProduct> update(@RequestBody Product product) {
-		DTOProduct dtoProduct = new DTOProduct();
+	public ResponseEntity<DTOProduct> update(@RequestBody DTOProduct dtoProduct) {
 		try {
-			Product updatedProduct = this.productService.updateProduct(product);
+			Product updatedProduct = this.productService.updateProduct(dtoProduct);
 			dtoProduct.setProduct(updatedProduct);
 			dtoProduct.setMessage(new SmartMessage("OK"));
 			return ResponseEntity.ok().body(dtoProduct);
@@ -65,10 +64,9 @@ public class ProductRestController {
 	}
 
 	@PostMapping("product/")
-	public ResponseEntity<DTOProduct> create(@RequestBody Product product) {
-		DTOProduct dtoProduct = new DTOProduct();
+	public ResponseEntity<DTOProduct> create(@RequestBody DTOProduct dtoProduct) {
 		try {
-			Product newProduct = this.productService.createProduct(product);
+			Product newProduct = this.productService.createProduct(dtoProduct);
 			dtoProduct.setProduct(newProduct);
 			dtoProduct.setMessage(new SmartMessage("OK"));
 			return ResponseEntity.ok().body(dtoProduct);
