@@ -43,11 +43,11 @@ public class Invoice {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Product> products;
 	private Double amount;
-	// private String descuento;
+	private String descuento;
 	@Transient
 	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private List<Promotion> promotions;
-	// private Integer cantidad;
+	private Integer cantidad;
 	private String paymentMethod;
 	private String channel;
 

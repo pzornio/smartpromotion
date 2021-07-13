@@ -35,7 +35,7 @@ public class InvoiceService {
 	}
 
 	public Invoice createInvoice(Invoice invoice) {
-		Client client=this.clientRepository.findById(invoice.getClient().getId()).get();
+		Client client = this.clientRepository.findById(invoice.getClient().getId()).get();
 		invoice.setClient(client);
 		return invoiceRepository.save(invoice);
 	}
