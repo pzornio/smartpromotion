@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Marcela
+Build-Jdk: 15.0.2
+Implementation-Title: WS REST JAVA WORKSHOP
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: org.springframework.boot
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/learsoft-rest-java-workshop
+Created-By: Maven Integration for Eclipse
+
