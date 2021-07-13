@@ -45,11 +45,11 @@ public class Invoice {
 	@ManyToMany
 	private List<Product> products;
 	private Double amount;
-	// private String descuento;
+	private String descuento;
 	@Transient
 	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private List<Promotion> promotions;
-	// private Integer cantidad;
+	private Integer cantidad;
 	private String paymentMethod;
 	private String channel;
 
