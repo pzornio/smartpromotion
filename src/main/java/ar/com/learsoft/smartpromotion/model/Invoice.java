@@ -1,6 +1,6 @@
 package ar.com.learsoft.smartpromotion.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,7 +34,7 @@ public class Invoice {
 	private Integer id;
 	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Client client;
-	private Date date;
+	private Timestamp purchaseDate;
 	@ManyToMany
 	private List<Product> products;
 	private Double amount;

@@ -1,5 +1,6 @@
 package ar.com.learsoft.smartpromotion.repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
 			+ "FROM INVOICE i JOIN INVOICE_PRODUCTS ip " + "WHERE i.ID = ip.INVOICE_ID "
 			+ "AND i.CLIENT_ID = :clientId " + "AND ip.PRODUCTS_ID = :productId", nativeQuery = true)
 	public List<Invoice> findClientProductInvoices(Integer clientId, Integer productId);
+
+	@Query(value = "SELECT * FROM INVOICE WHERE CLIENT_ID= :clientId  and purchase_date > :timestamp", nativeQuery = true)
+	public List<Invoice> findInvoiceNewerThan(Integer clientId, Timestamp timestamp);
 }

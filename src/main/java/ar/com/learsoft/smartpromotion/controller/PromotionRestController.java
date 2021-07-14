@@ -94,9 +94,16 @@ public class PromotionRestController{
 		return this.promotionService.deletePromotion(id);
 	}
 	
-//	@GetMapping("promotion/client/{clientId}")
-//	public ResponseEntity<List<DTOPromotion>> findClientPromotion(@PathVariable Integer clientId) {
-//		
-//	}
+	@GetMapping("promotion/client/{clientId}")
+	public ResponseEntity<List<DTOPromotion>> findClientPromotion(@PathVariable Integer clientId) {
+		ArrayList<DTOPromotion> dtoPromotions = new ArrayList<>();
+		List<Promotion> promotions = this.promotionService.findPromotionsByClient(clientId);
+		for (Promotion promotion : promotions) {
+			DTOPromotion dtoPromotion = new DTOPromotion();
+			dtoPromotion.setPromotion(promotion);
+			dtoPromotion.setMessage(new SmartMessage("OK"));
+		}
+		return ResponseEntity.ok().body(dtoPromotions);
+	}
 
 }

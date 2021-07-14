@@ -1,6 +1,5 @@
 package ar.com.learsoft.smartpromotion.dto;
 
-import ar.com.learsoft.smartpromotion.model.Product;
 import ar.com.learsoft.smartpromotion.model.Promotion;
 import lombok.Getter;
 import lombok.Setter;

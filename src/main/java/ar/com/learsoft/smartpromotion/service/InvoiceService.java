@@ -1,6 +1,8 @@
 package ar.com.learsoft.smartpromotion.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,8 @@ public class InvoiceService {
 
 	public Invoice createInvoice(DTOInvoice dtoInvoice) {
 		Invoice invoice = new Invoice();
+		Timestamp purchaseDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
+		dtoInvoice.setPurchaseDate(purchaseDate);
 		this.buildInvoice(invoice, dtoInvoice);
 		return invoiceRepository.save(invoice);
 	}
@@ -53,7 +57,6 @@ public class InvoiceService {
 	private Invoice buildInvoice(Invoice invoice, DTOInvoice dtoInvoice) {
 		Client client = clientService.findClient(dtoInvoice.getClientId());
 		invoice.setClient(client);
-
 		List<Integer> promotionIds = dtoInvoice.getPromotionIds();
 		if(promotionIds != null) {
 			ArrayList<Promotion> promotions = new ArrayList<>();
@@ -70,13 +73,19 @@ public class InvoiceService {
 			products.add(product);
 		}
 		invoice.setProducts(products);	
-		invoice.setDate(dtoInvoice.getDate());	
+		invoice.setPurchaseDate(dtoInvoice.getPurchaseDate());	
 		invoice.setAmount(dtoInvoice.getAmount());
 		invoice.setChannel(dtoInvoice.getChannel());
 		invoice.setDescuento(dtoInvoice.getDescuento());
 		invoice.setItemCount(dtoInvoice.getItemCount());
 		invoice.setPaymentMethod(dtoInvoice.getPaymentMethod());
 		return invoice;
+	}
+
+	public List<Invoice> findInvoiceNewerThan(Integer clientId, Long timeInMillis) {
+		Timestamp timestamp = new Timestamp(timeInMillis);
+		List<Invoice> list = this.invoiceRepository.findInvoiceNewerThan(clientId,timestamp);
+		return list;
 	}
 
 }

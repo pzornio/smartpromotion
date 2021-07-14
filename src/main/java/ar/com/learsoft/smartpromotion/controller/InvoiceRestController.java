@@ -83,6 +83,7 @@ public class InvoiceRestController {
 			DTOInvoice dtoInvoice = new DTOInvoice();
 			dtoInvoice.setInvoice(invoice);
 			dtoInvoice.setMessage(new SmartMessage("OK"));
+			dtoInvoices.add(dtoInvoice);
 		}
 		return ResponseEntity.ok().body(dtoInvoices);
 	}

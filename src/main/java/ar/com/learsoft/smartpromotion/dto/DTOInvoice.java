@@ -1,7 +1,7 @@
 package ar.com.learsoft.smartpromotion.dto;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import ar.com.learsoft.smartpromotion.model.Invoice;
@@ -19,7 +19,7 @@ public class DTOInvoice extends DTOGeneric {
 	private Integer clientId;
 	private List<Integer> productIds;
 	private List<Integer> promotionIds;
-	private Date date;
+	private Timestamp purchaseDate;
 	private Double amount;
 	private String descuento;
 	private Integer itemCount;
@@ -39,7 +39,7 @@ public class DTOInvoice extends DTOGeneric {
 				promotionIds.add(promotion.getId());
 			}
 		}
-		this.date = invoice.getDate();
+		this.purchaseDate = invoice.getPurchaseDate();
 		this.amount = invoice.getAmount();
 		this.descuento = invoice.getDescuento();
 		this.itemCount = invoice.getItemCount();
