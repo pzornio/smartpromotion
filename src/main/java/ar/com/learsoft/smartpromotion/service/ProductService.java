@@ -1,5 +1,7 @@
 package ar.com.learsoft.smartpromotion.service;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +42,9 @@ public class ProductService {
 	public String deleteProduct(Integer id) {
 		productRepository.deleteById(id);
 		return "Product Deleted  " + id;
+	}
+
+	public List<Product> findClientProductCount(Calendar calendar, Integer clientId, Integer itemCount) {
+		return productRepository.findClientProductCount(clientId, new Timestamp(calendar.getTimeInMillis()), itemCount);	
 	}
 }

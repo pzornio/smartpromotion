@@ -18,4 +18,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
 
 	@Query(value = "SELECT * FROM INVOICE WHERE CLIENT_ID= :clientId  and purchase_date > :timestamp", nativeQuery = true)
 	public List<Invoice> findInvoiceNewerThan(Integer clientId, Timestamp timestamp);
+	
+	
+
 }

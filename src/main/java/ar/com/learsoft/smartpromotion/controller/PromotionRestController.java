@@ -102,6 +102,7 @@ public class PromotionRestController{
 			DTOPromotion dtoPromotion = new DTOPromotion();
 			dtoPromotion.setPromotion(promotion);
 			dtoPromotion.setMessage(new SmartMessage("OK"));
+			dtoPromotions.add(dtoPromotion);
 		}
 		return ResponseEntity.ok().body(dtoPromotions);
 	}
