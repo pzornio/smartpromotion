@@ -106,5 +106,13 @@ public class PromotionRestController{
 		}
 		return ResponseEntity.ok().body(dtoPromotions);
 	}
+	
+	@GetMapping("promotion/client/hVP/{clientId}")
+	public Integer higherValuePromotion(@PathVariable Integer clientId) {
+		
+		Integer promotions = this.promotionService.higherValuePromotion(clientId);
+		
+		return promotions;
+	}
 
 }

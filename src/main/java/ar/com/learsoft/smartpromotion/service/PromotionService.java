@@ -2,6 +2,7 @@ package ar.com.learsoft.smartpromotion.service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -63,6 +64,16 @@ public class PromotionService {
 		return promotionList;
 	}
 	
+	public Integer higherValuePromotion(Integer clientId) {
+		List<Promotion> list = findPromotionsByClient(clientId); 
+		List<Integer> discount= new ArrayList<Integer>();
+		for (Promotion promotion : list) {
+			discount.add(promotion.getDiscount());
+		}
+//		Collections.sort(discount);
+		return Collections.max(discount);
+		
+	}
 	
 	
 	private List<Promotion> findPromotion3(Integer clientId){
