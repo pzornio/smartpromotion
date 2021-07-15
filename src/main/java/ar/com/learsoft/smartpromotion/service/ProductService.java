@@ -47,4 +47,8 @@ public class ProductService {
 	public List<Product> findClientProductCount(Calendar calendar, Integer clientId, Integer itemCount) {
 		return productRepository.findClientProductCount(clientId, new Timestamp(calendar.getTimeInMillis()), itemCount);	
 	}
+	
+	public List<Product> findClientProductAMountTotal(Calendar calendar, Integer clientId, Integer itemAmountTotal) {
+		return productRepository.findClientProductCountAmount(clientId, new Timestamp(calendar.getTimeInMillis()), itemAmountTotal);	
+	}
 }

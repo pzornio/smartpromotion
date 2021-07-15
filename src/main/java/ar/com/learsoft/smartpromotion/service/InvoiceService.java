@@ -76,7 +76,7 @@ public class InvoiceService {
 		invoice.setPurchaseDate(dtoInvoice.getPurchaseDate());	
 		invoice.setAmount(dtoInvoice.getAmount());
 		invoice.setChannel(dtoInvoice.getChannel());
-		invoice.setDescuento(dtoInvoice.getDescuento());
+		invoice.setDiscount(dtoInvoice.getDiscount());
 		invoice.setItemCount(dtoInvoice.getItemCount());
 		invoice.setPaymentMethod(dtoInvoice.getPaymentMethod());
 		return invoice;

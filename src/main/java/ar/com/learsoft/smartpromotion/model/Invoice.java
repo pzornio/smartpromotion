@@ -38,12 +38,12 @@ public class Invoice {
 	@ManyToMany
 	private List<Product> products;
 	private Double amount;
-	private String descuento;
+	private String discount;
 	@Transient
 	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private List<Promotion> promotions;
 	private Integer itemCount;
 	private String paymentMethod;
 	private String channel;
-
+	//comentario
 }

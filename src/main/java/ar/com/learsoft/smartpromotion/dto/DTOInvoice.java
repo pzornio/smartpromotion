@@ -21,7 +21,7 @@ public class DTOInvoice extends DTOGeneric {
 	private List<Integer> promotionIds;
 	private Timestamp purchaseDate;
 	private Double amount;
-	private String descuento;
+	private String discount;
 	private Integer itemCount;
 	private String paymentMethod;
 	private String channel;
@@ -41,7 +41,7 @@ public class DTOInvoice extends DTOGeneric {
 		}
 		this.purchaseDate = invoice.getPurchaseDate();
 		this.amount = invoice.getAmount();
-		this.descuento = invoice.getDescuento();
+		this.discount = invoice.getDiscount();
 		this.itemCount = invoice.getItemCount();
 		this.paymentMethod = invoice.getPaymentMethod();
 		this.channel = invoice.getChannel();
