@@ -21,7 +21,7 @@ public class PromotionService {
 
 	public Promotion updatePromotion(DTOPromotion dtoPromotion) {
 		Promotion currentPromotion = this.findPromotion(dtoPromotion.getId());
-		currentPromotion.setProduct(this.productService.findProduct(dtoPromotion.getProductId()));
+		currentPromotion.setProductId(dtoPromotion.getProductId());
 		currentPromotion.setCode(dtoPromotion.getCode());
 		currentPromotion.setDiscount(dtoPromotion.getDiscount());
 		return promotionRepository.save(currentPromotion);
@@ -33,7 +33,7 @@ public class PromotionService {
 
 	public Promotion createPromotion(DTOPromotion dtoPromotion) {
 		Promotion promotion = dtoPromotion.buildPromotion();
-		promotion.setProduct(this.productService.findProduct(dtoPromotion.getProductId()));
+		promotion.setProductId(dtoPromotion.getProductId());
 		return promotionRepository.save(promotion);
 	}
 
@@ -67,7 +67,7 @@ public class PromotionService {
 			Promotion promotion = new Promotion();
 			promotion.setCode("1");
 			promotion.setDiscount(15);
-			promotion.setProduct(product);
+			promotion.setProductId(product.getId());
 			promotion1.add(promotion);
 		}
 		return promotion1;
@@ -82,7 +82,7 @@ public class PromotionService {
 			Promotion promotion = new Promotion();
 			promotion.setCode("2");
 			promotion.setDiscount(20);
-			promotion.setProduct(product);
+			promotion.setProductId(product.getId());
 			promotion2.add(promotion);
 		}
 		return promotion2;
@@ -97,7 +97,7 @@ public class PromotionService {
 			Promotion promotion = new Promotion();
 			promotion.setCode("3");
 			promotion.setDiscount(25);
-			promotion.setProduct(product);
+			promotion.setProductId(product.getId());
 			promotion3.add(promotion);
 		}
 		return promotion3;
@@ -112,7 +112,7 @@ public class PromotionService {
 			Promotion promotion = new Promotion();
 			promotion.setCode("4");
 			promotion.setDiscount(10);
-			promotion.setProduct(product);
+			promotion.setProductId(product.getId());
 			promotion4.add(promotion);
 		}
 		return promotion4;
@@ -127,7 +127,7 @@ public class PromotionService {
 			Promotion promotion = new Promotion();
 			promotion.setCode("5");
 			promotion.setDiscount(15);
-			promotion.setProduct(product);
+			promotion.setProductId(product.getId());
 			promotion5.add(promotion);
 		}
 		return promotion5;
@@ -142,7 +142,7 @@ public class PromotionService {
 			Promotion promotion = new Promotion();
 			promotion.setCode("6");
 			promotion.setDiscount(10);
-			promotion.setProduct(product);
+			promotion.setProductId(product.getId());
 			promotion6.add(promotion);
 		}
 		return promotion6;
@@ -157,7 +157,7 @@ public class PromotionService {
 			Promotion promotion = new Promotion();
 			promotion.setCode("7");
 			promotion.setDiscount(15);
-			promotion.setProduct(product);
+			promotion.setProductId(product.getId());
 			promotion7.add(promotion);
 		}
 		return promotion7;

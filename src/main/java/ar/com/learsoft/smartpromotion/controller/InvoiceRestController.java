@@ -43,7 +43,36 @@ public class InvoiceRestController {
 			dtoInvoice.setMessage(new SmartMessage("ERROR INESPERADO"));
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dtoInvoice);
 		}
+	}	
+
+	@GetMapping("invoice/")
+	public ResponseEntity<List<DTOInvoice>> readAll() {
+		ArrayList<DTOInvoice> dtoInvoices = new ArrayList<>();
+		List<Invoice> invoices = this.invoiceService.findAllInvoices();
+		for (Invoice invoice : invoices) {
+			DTOInvoice dtoInvoice = new DTOInvoice();
+			dtoInvoice.setInvoice(invoice);
+			dtoInvoice.setMessage(new SmartMessage("OK"));
+			dtoInvoices.add(dtoInvoice);
+		}
+		return ResponseEntity.ok().body(dtoInvoices);
 	}
+
+
+	@GetMapping("invoice/{clientId}/{productId}")
+	public ResponseEntity<List<DTOInvoice>> readClientProductInvoice(@PathVariable Integer clientId, @PathVariable Integer productId) {
+		ArrayList<DTOInvoice> dtoInvoices = new ArrayList<>();
+		List<Invoice> invoices = this.invoiceService.findClientProductInvoices(clientId, productId);
+		for (Invoice invoice : invoices) {
+			DTOInvoice dtoInvoice = new DTOInvoice();
+			dtoInvoice.setInvoice(invoice);
+			dtoInvoice.setMessage(new SmartMessage("OK"));
+			dtoInvoices.add(dtoInvoice);
+		}
+		return ResponseEntity.ok().body(dtoInvoices);
+	}
+
+	
 
 	@PatchMapping("invoice/")
 	public ResponseEntity<DTOInvoice> update(@RequestBody DTOInvoice dtoInvoice) {
@@ -74,20 +103,7 @@ public class InvoiceRestController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dtoInvoice);
 		}
 	}
-
-	@GetMapping("invoice/")
-	public ResponseEntity<List<DTOInvoice>> readAll() {
-		ArrayList<DTOInvoice> dtoInvoices = new ArrayList<>();
-		List<Invoice> invoices = this.invoiceService.findAllInvoices();
-		for (Invoice invoice : invoices) {
-			DTOInvoice dtoInvoice = new DTOInvoice();
-			dtoInvoice.setInvoice(invoice);
-			dtoInvoice.setMessage(new SmartMessage("OK"));
-			dtoInvoices.add(dtoInvoice);
-		}
-		return ResponseEntity.ok().body(dtoInvoices);
-	}
-
+	
 	@DeleteMapping("invoice/{id}")
 	public String delete(@PathVariable Integer id) {
 		return this.invoiceService.deleteInvoice(id);

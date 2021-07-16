@@ -84,6 +84,7 @@ public class ProductRestController {
 			DTOProduct dtoProduct = new DTOProduct();
 			dtoProduct.setProduct(product);
 			dtoProduct.setMessage(new SmartMessage("OK"));
+			dtoProducts.add(dtoProduct);
 		}
 		return ResponseEntity.ok().body(dtoProducts);
 	}

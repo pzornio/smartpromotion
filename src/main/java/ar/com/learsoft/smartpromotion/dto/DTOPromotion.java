@@ -15,7 +15,7 @@ public class DTOPromotion extends DTOGeneric{
 	
 	public void setPromotion(Promotion promotion) {
 		this.id = promotion.getId();
-		this.productId = promotion.getProduct().getId();
+		this.productId = promotion.getProductId();
 		this.code = promotion.getCode();
 		this.discount = promotion.getDiscount();
 	}

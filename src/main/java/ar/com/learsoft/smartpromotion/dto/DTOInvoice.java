@@ -18,7 +18,7 @@ public class DTOInvoice extends DTOGeneric {
 	private Integer invoiceId;
 	private Integer clientId;
 	private List<Integer> productIds;
-	private List<Integer> promotionIds;
+	private List<String> promotionCodes;
 	private Timestamp purchaseDate;
 	private Double amount;
 	private String discount;
@@ -29,14 +29,16 @@ public class DTOInvoice extends DTOGeneric {
 	public void setInvoice(Invoice invoice) {
 		this.invoiceId = invoice.getId();
 		this.clientId = invoice.getClient().getId();
-		this.productIds = new ArrayList<>();
+		this.productIds = new ArrayList<>();				
 		for (Product product : invoice.getProducts()) {
 			productIds.add(product.getId());
 		}
-		this.promotionIds = new ArrayList<>();
+		
+		this.promotionCodes = new ArrayList<>();
+		
 		if (invoice.getPromotions() != null) {
 			for (Promotion promotion : invoice.getPromotions()) {
-				promotionIds.add(promotion.getId());
+				promotionCodes.add(promotion.getCode());
 			}
 		}
 		this.purchaseDate = invoice.getPurchaseDate();

@@ -48,6 +48,10 @@ public class InvoiceService {
 	public List<Invoice> findAllInvoices() {
 		return invoiceRepository.findAll();
 	}
+	
+	public List<Invoice> findClientProductInvoices(Integer clientId, Integer productId) {
+		return invoiceRepository.findClientProductInvoices(clientId, productId);
+	}
 
 	public String deleteInvoice(Integer id) {
 		invoiceRepository.deleteById(id);
@@ -57,21 +61,32 @@ public class InvoiceService {
 	private Invoice buildInvoice(Invoice invoice, DTOInvoice dtoInvoice) {
 		Client client = clientService.findClient(dtoInvoice.getClientId());
 		invoice.setClient(client);
-		List<Integer> promotionIds = dtoInvoice.getPromotionIds();
-		if(promotionIds != null) {
-			ArrayList<Promotion> promotions = new ArrayList<>();
-			for (Integer promotionId : promotionIds) {
-				Promotion promotion = promotionService.findPromotion(promotionId);
-				promotions.add(promotion);
-			}
-			invoice.setPromotions(promotions);	
-		}		
+		
+		
+//		List<Integer> promotionIds = dtoInvoice.getPromotionIds();
+//		if(promotionIds != null) {
+//			ArrayList<Promotion> promotions = new ArrayList<>();
+//			for (Integer promotionId : promotionIds) {
+//				Promotion promotion = promotionService.findPromotion(promotionId);
+//				promotions.add(promotion);
+//			}
+//			invoice.setPromotions(promotions);	
+//		}		
+		
+		
+		
 		List<Integer> productIds = dtoInvoice.getProductIds();
+		List<Promotion> promotions = new ArrayList<>();
+		
 		ArrayList<Product> products = new ArrayList<>();
 		for (Integer productId : productIds) {
 			Product product = productService.findProduct(productId);
 			products.add(product);
+			promotions.addAll(promotionService.findPromotionsByClient(dtoInvoice.getClientId()));
 		}
+		
+		
+		invoice.setPromotions(promotions);		
 		invoice.setProducts(products);	
 		invoice.setPurchaseDate(dtoInvoice.getPurchaseDate());	
 		invoice.setAmount(dtoInvoice.getAmount());

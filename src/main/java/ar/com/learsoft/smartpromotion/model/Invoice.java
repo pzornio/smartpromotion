@@ -39,8 +39,9 @@ public class Invoice {
 	private List<Product> products;
 	private Double amount;
 	private String discount;
-	@Transient
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
+//	@Transient
+//	@JsonInclude(JsonInclude.Include.NON_ABSENT)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Promotion> promotions;
 	private Integer itemCount;
 	private String paymentMethod;

@@ -82,6 +82,7 @@ public class ClientRestController {
 			DTOClient dtoClient = new DTOClient();
 			dtoClient.setClient(client);
 			dtoClient.setMessage(new SmartMessage("OK"));
+			dtoClients.add(dtoClient);
 		}
 		return ResponseEntity.ok().body(dtoClients);
 	}
